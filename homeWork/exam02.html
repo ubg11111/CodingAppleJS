@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer">
+    <button id="send-answer">제출</button>
+
+
+<script>
+
+    // 이자율 계산하기
+
+    // let 예금액 = 60000;
+    // let 미래예금액 = 0;
+
+
+    // if(예금액 >= 50000){
+    //         미래예금액 = 예금액 * 1.20 * 1.20;
+    // } else if(예금액 < 50000){
+    //         미래예금액 = 예금액 * 1.15 * 1.15;
+    // }
+
+    // console.log(미래예금액);
+
+    
+    // 커피리필을 이상하게 해주는 곳이 있다. 최대한 마실 수 있는 커피양을 계산해보자.
+
+    // let first = 360;
+    // let total = 0;
+
+    // total = first * 2 / 3 + first * 2 / 3 * 2 / 3;
+
+    // console.log(total);
+    
+
+
+    // 간단한 퀴즈 UI를 만들어 보자.
+    
+    let age = 1335;
+    let count = 0;
+
+    document.querySelector("#send-answer").addEventListener("click", function(){
+        let answer = document.querySelector('#answer');
+        count++;
+
+        if(answer.value == age){
+            alert("성공");
+        } else if(count >= 3){
+            alert("멍청아");
+        } else if(answer.value != age){
+            alert("답이 틀렸습니다.")
+        }
+    }); 
+    
+
+
+</script>
+</body>
+</html>
