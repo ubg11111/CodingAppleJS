@@ -9,6 +9,7 @@
     color: white;
     border-radius: 5px;
     display: none;
+    text-align: right;
 }
 
 .list-group{

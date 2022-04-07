@@ -9,37 +9,43 @@
 // jquery의 경우 .클래스를 가져오는 경우 모든 클래스를 가져오는데.
 // index의 원하는 자리를 가져와야하는 경우 eq() 메서드를 통해서 가져오면 된다.
 
-let button1 = $('.tab-button');
-let button2 = '.tab-button';
-let content1 = $('.tab-content');
-let content2 = '.tab-content';
+
+// for(let i=0; i<3; i++){
+//     $('.tab-button').eq(i).on('click', ()=>{
+//         tabOpen(i);
+//     })
+// }
 
 
-button1.eq(0).on('click', function(){
-    button1.removeClass('orange');
-    button1.eq(0).addClass('orange');
-    content1.removeClass('show');
-    content1.eq(0).addClass('show');
+$('.list').click( (e)=>{
+
+    tabOpen(parseInt(e.target.dataset.id));
+    console.log(parseInt(e.target.dataset.id));
 });
 
-if(count == 1){
-    document.querySelectorAll(button2)[1].addEventListener('click', function(){
-        document.querySelector(button2).classList.remove('orange');
-        document.querySelectorAll(button2)[1].classList.add('orange');
-        document.querySelector(content2).classList.remove('show');
-        document.querySelectorAll(content2)[1].classList.add('show');
-    });
 
-    count = 2;
+
+function tabOpen(숫자){
+    $('.tab-button').removeClass('orange');
+    $('.tab-button').eq(숫자).addClass('orange');
+    $('.tab-content').removeClass('show');
+    $('.tab-content').eq(숫자).addClass('show');
 }
 
-if(count == 2){
-    document.querySelectorAll(button2)[2].addEventListener('click', function(){
-        document.querySelector(button2).classList.remove('orange'); 
-        document.querySelectorAll(button2)[2].classList.add('orange');
-        document.querySelector(content2).classList.remove('show');
-        document.querySelectorAll(content2)[2].classList.add('show');
-    });
+// 상품의 가격을 추가하는 탭
 
-    count = 1;
-}
+// array 배열형태의 car1
+// 출력방법 : 변수[index] 변수안에 해당하는 인덱스를 숫자로 넣어주면된다.
+// 장점은 정렬 및 자르기 및 넣기 등등이 가능하다. 순서가 0부터 ~ 까지 순서대로 출력되기에
+let car = ['소나타',50000,'white'];
+
+console.log(car.slice(1,3));
+
+// object방식의 car2 
+// key,value 형태로 저장된다.
+// 출력방법 : 변수.키 
+// 많은 데이터량의 이름을 부여할때 용이하게 사용한다 재사용의 장점이 확실함.
+let car2 = {name:"아반떼", price:50000}
+
+let text = document.querySelector('.card');
+text.innerHTML = car2.name + " / " + car2.price;

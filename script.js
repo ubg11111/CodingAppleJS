@@ -129,3 +129,26 @@ window.addEventListener('scroll', ()=>{
         .css("color", "black");
     }
 });
+
+
+// 모든 브라우저는 이벤트 버블링이 일어남 (이벤트가 상위 html로 퍼지는 현상)
+// 따라서 아래와같이 이벤트형식을 주고도 다른 영역을 클릭했을때 이벤트버블링에 의해 아래 이벤트가 적용됨.
+// 유용한 이벤트 함수(콜백함수) 명령어
+
+/*
+    e.target; // 유저가 실제로 누른거(어디 영역을 눌럿는지)
+    e.currentTarget; // 이벤트리스너 달린 곳 보통 this문임.
+    e.preventDefault(); // 이벤트 기본동작을 막아줌. submit이나 전송객체에서 동작을 막아준다. 클릭안해준 형식과같음.
+    e.stopPropagation(); // 내 상위요소로 이벤트를 막아줌.
+*/
+
+document.querySelector(".black-bg").addEventListener('click', (e)=>{
+    let black_bg = document.querySelector(".black-bg");
+
+    if(e.target === black_bg){
+        black_bg.classList.remove('show-modal');
+    }
+    
+    
+});
+
