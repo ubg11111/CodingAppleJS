@@ -45,7 +45,13 @@ console.log(car.slice(1,3));
 // key,value 형태로 저장된다.
 // 출력방법 : 변수.키 
 // 많은 데이터량의 이름을 부여할때 용이하게 사용한다 재사용의 장점이 확실함.
-let car2 = {name:"아반떼", price:50000}
+let car2 = {name:"아반떼", price:[50000,3000,4000]}
 
-let text = document.querySelector('.card');
-text.innerHTML = car2.name + " / " + car2.price;
+let title = document.querySelector('.car-title');
+let price = document.querySelector('.car-price');
+
+title.innerHTML = car2.name;
+
+price.innerHTML = car2.price[0];
+
+
