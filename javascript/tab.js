@@ -55,3 +55,22 @@ title.innerHTML = car2.name;
 price.innerHTML = car2.price[0];
 
 
+// 상품선택의 제품을 클릭했을 때 사이즈 셀렉트가 나오게끔 구현
+
+    document.querySelectorAll('.form-select')[0].addEventListener('input', function(e){
+        // let value = document.querySelectorAll('.form-select')[0].value;
+        
+        // 현재 메서드안에서 선언된 this는 해당 객체의 메서드를 가리킨다.
+        // let value = this.value;
+
+        // e(이벤트함수) currentTarget은 현재 이벤트리스너가 달린요소
+        let value = e.currentTarget.value;
+
+        if(value == '셔츠'){
+            document.querySelectorAll('.form-select')[1].classList.remove('form-hide');
+        }else if(value == '모자'){
+            document.querySelectorAll('.form-select')[1].classList.add('form-hide');
+        }
+    })
+    
+
