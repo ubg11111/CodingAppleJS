@@ -70,7 +70,35 @@ price.innerHTML = car2.price[0];
             document.querySelectorAll('.form-select')[1].classList.remove('form-hide');
         }else if(value == '모자'){
             document.querySelectorAll('.form-select')[1].classList.add('form-hide');
+        }else if(value == '바지'){
+            $('.form-select').eq(1).removeClass('form-hide');
+            $('.form-select').eq(1).html('');
+            
+            // '' or "" 는 엔터형식으로 연결해서 작성이 불가능하기에 ``(백틱) 형식으로 작성하는것이 옳다.
+            // 셀렉트 추가하기
+            let templet = `<option>28</option>
+                            <option>30</option>`;
+
+            $('.form-select').eq(1).append(templet);
         }
+
     })
     
 
+// 자바스크립트로 html을 생성하는 방법
+
+    // createElement('p') 라는 메서드를 통해서 html태그요소인 p태그를 생성
+    //let a = document.createElement('p');
+    // p값에 문자열을 삽입하고
+    //a.innerHTML = "안녕";
+    // 빈박스(div)에 선택자id를 DOM객체를 사용해서 연결하고 appendChild(자식요소를 하위태그에 추가)하는 메서드를 사용하여 a매개변수를 넣는다.
+    //document.querySelector("#test").appendChild(a);
+
+// 자바스크립트로 html 생성법 2번째
+    // let tmp = '<p>안녕</p>';
+    //  document.querySelector('#test').insertAdjacentHTML('beforeend', tmp);
+    //  제이쿼리 문법은 아래와 같다.
+    // $('#test').append(tmp);
+
+       
+    
