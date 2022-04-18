@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- array, for 반복문의 실력향상 과제 -->
+
+    <div style="text-align: center;">
+        <h1>과제 정리 화면</h1>
+    </div>
+
+    <script>
+
+    let 출석부 = ['흥민', '영희', '철수', '재석'];
+
+    function 이름찾기(name){
+        
+        for(let i=0; i<출석부.length; i++){
+            if(출석부[i] == name){
+                console.log("있어요");
+            } 
+        }
+        
+    }
+
+    이름찾기('재석');
+
+    // 구구단 출력하기
+
+
+    for(let i=2; i<=9; i++){
+        for(let j=1; j<=9; j++){
+            console.log(i*j);        
+        }
+    }
+
+    // 평균점수 계산기 만들기
+
+    function 점수(평균점수, 점수){
+        let result = 0;
+
+        for(let i=0; i<평균점수.length; i++){
+            result += 평균점수[i];
+        }
+
+        if(result/평균점수.length < 점수){
+            console.log("점수상승");
+        } else{
+            console.log('같거나 떨어졌네요 재수');
+        }
+    }
+
+    점수([10,20,30,40,50],40);
+    
+    </script>
+
+
+</body>
+</html>
+
+
+
+
