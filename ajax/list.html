@@ -26,16 +26,115 @@
 
   <div class="container">
     <button class="btn btn-danger" id="more">더보기</button>
+    <button class="btn btn-danger" id="price">가격순정렬</button>
+    <button class="btn btn-danger" id="product">상품명정렬</button>
+    <button class="btn btn-danger" id="lowMoney">6만원이하 상품표시</button>
   </div>
 <script>
 
-    let products = [
-        {id : 0, price : 70000, title: 'Blossom Dress'},
-        {id : 1, price : 50000, title: 'Springfiled Shirt'},
-        {id : 2, price : 60000, title: 'Black Monastery'}
-    ];
+  let products = [
+      {id : 0, price : 70000, title: 'Blossom Dress'},
+      {id : 1, price : 50000, title: 'Springfiled Shirt'},
+      {id : 2, price : 60000, title: 'Black Monastery'}
+
+  ];
 
 
+
+  // 가격순 정렬 
+  $('#price').click(function(){
+
+    products.sort(function(a, b){
+
+      return a.price - b.price;
+
+    });
+
+    $('.row').html('');
+
+    for(let i=0; i<products.length; i++){
+
+    let = templet = `<div class="col-sm-4">
+    <img src="https://via.placeholder.com/600" class="w-100">
+    <h5>${products[i].title}</h5>
+    <p>${products[i].price}</p>
+    </div>`;
+
+    $('.row').append(templet);
+    }
+  });
+
+  // 상품명 정렬
+  $('#product').click(function(){
+
+    products.sort(function(a,b){
+
+      return (a.title > b.title) - (a.title < b.title);
+
+    });
+
+    $('.row').html('');
+    for(let i=0; i<products.length; i++){
+
+    let = templet = `<div class="col-sm-4">
+    <img src="https://via.placeholder.com/600" class="w-100">
+    <h5>${products[i].title}</h5>
+    <p>${products[i].price}</p>
+    </div>`;
+
+    $('.row').append(templet);
+    }
+
+  });
+
+
+  // 6만원 이하 상품명만 표시
+  $('#lowMoney').click(function(){
+
+    let low = products.filter(function(a){
+      
+      return a.price <= 60000;
+      
+    });
+
+    console.log(low);
+    $('.row').html('');
+        for(let i=0; i<low.length; i++){
+
+        let = templet = `<div class="col-sm-4">
+                          <img src="https://via.placeholder.com/600" class="w-100">
+                          <h5>${low[i].title}</h5>
+                          <p>${low[i].price}</p>
+                          </div>`;
+
+        $('.row').append(templet);
+      }
+  });
+
+
+
+
+  // // 필터기능
+  // let array = [7,5,3,2,30];
+
+  // let newArray = array.filter(function(a){
+
+  //   // 필터는 조건식을 줘서 조건식에 해당하는 값만 출력할 수 있음.
+  //   return a > 10;
+    
+  // });
+  // console.log(newArray);
+
+  // 정렬기능
+  // let array = [7,3,5,2,40];
+  // let array2 = ['a', 'c' , 'b'];
+  // array.sort(function(a,b){
+  //   // a값이 양수면 a를 오른쪽으로 b값이 음수면 오른쪽으로
+  //   // ex) a(7) - b(3) = 4(양수) 오른쪽이동 (오름차순 정렬 됨)
+  //   return -a + b;
+
+  // });
+  // console.log(array)
 
   for(let i=0; i<products.length; i++){
 
@@ -46,7 +145,6 @@
       </div>`;
 
       $('.row').append(templet);
-  
     }
     
     let count = 0;
@@ -83,19 +181,14 @@
                             </div>`;
 
             $('.row').append(templet);
+
         }
       });
+      e.target.disabled = true;
+      
     } // else if문 end
-    else if(count == 3){
-
-        e.target.disabled = true;
-
-    }
     console.log(count);
 }); // more 클릭 end
-
-  
-
 
   
 
