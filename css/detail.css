@@ -38,3 +38,9 @@ ul.list {
   .form-hide{
     display: none;
   }
+
+  .container{
+
+    margin-top: 30px;
+
+  }

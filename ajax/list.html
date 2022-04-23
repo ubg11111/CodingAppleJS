@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head id="headers">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=\, initial-scale=1.0">
@@ -30,6 +30,8 @@
     <button class="btn btn-danger" id="product">상품명정렬</button>
     <button class="btn btn-danger" id="lowMoney">6만원이하 상품표시</button>
   </div>
+
+
 <script>
 
   let products = [
@@ -39,102 +41,8 @@
 
   ];
 
+  
 
-
-  // 가격순 정렬 
-  $('#price').click(function(){
-
-    products.sort(function(a, b){
-
-      return a.price - b.price;
-
-    });
-
-    $('.row').html('');
-
-    for(let i=0; i<products.length; i++){
-
-    let = templet = `<div class="col-sm-4">
-    <img src="https://via.placeholder.com/600" class="w-100">
-    <h5>${products[i].title}</h5>
-    <p>${products[i].price}</p>
-    </div>`;
-
-    $('.row').append(templet);
-    }
-  });
-
-  // 상품명 정렬
-  $('#product').click(function(){
-
-    products.sort(function(a,b){
-
-      return (a.title > b.title) - (a.title < b.title);
-
-    });
-
-    $('.row').html('');
-    for(let i=0; i<products.length; i++){
-
-    let = templet = `<div class="col-sm-4">
-    <img src="https://via.placeholder.com/600" class="w-100">
-    <h5>${products[i].title}</h5>
-    <p>${products[i].price}</p>
-    </div>`;
-
-    $('.row').append(templet);
-    }
-
-  });
-
-
-  // 6만원 이하 상품명만 표시
-  $('#lowMoney').click(function(){
-
-    let low = products.filter(function(a){
-      
-      return a.price <= 60000;
-      
-    });
-
-    console.log(low);
-    $('.row').html('');
-        for(let i=0; i<low.length; i++){
-
-        let = templet = `<div class="col-sm-4">
-                          <img src="https://via.placeholder.com/600" class="w-100">
-                          <h5>${low[i].title}</h5>
-                          <p>${low[i].price}</p>
-                          </div>`;
-
-        $('.row').append(templet);
-      }
-  });
-
-
-
-
-  // // 필터기능
-  // let array = [7,5,3,2,30];
-
-  // let newArray = array.filter(function(a){
-
-  //   // 필터는 조건식을 줘서 조건식에 해당하는 값만 출력할 수 있음.
-  //   return a > 10;
-    
-  // });
-  // console.log(newArray);
-
-  // 정렬기능
-  // let array = [7,3,5,2,40];
-  // let array2 = ['a', 'c' , 'b'];
-  // array.sort(function(a,b){
-  //   // a값이 양수면 a를 오른쪽으로 b값이 음수면 오른쪽으로
-  //   // ex) a(7) - b(3) = 4(양수) 오른쪽이동 (오름차순 정렬 됨)
-  //   return -a + b;
-
-  // });
-  // console.log(array)
 
   for(let i=0; i<products.length; i++){
 
@@ -142,11 +50,63 @@
       <img src="https://via.placeholder.com/600" class="w-100">
       <h5>${products[i].title}</h5>
       <p>${products[i].price}</p>
+      <button class="buy">구매</button>
       </div>`;
 
       $('.row').append(templet);
     }
     
+// ---------------------------------------------------------------------------------------
+    
+    // 브라우저내 로컬스토리지를 다뤄서 데이터를 저장하는 방법
+    // localStorage.setItem('name', 'kim');
+    // localStorage.getItem('name');
+    // localStorage.removeItem('name');
+
+    // array 배열의경우는 로컬스토리지에서는 문자로 반환하게된다. 
+    // 이런경우 배열을 JSON형태로 변환을 한 후 로컬스토리지에 저장하게되면 배열값을 그대로 출력할 수 있다.
+    let arr = [1,2,3]
+    let newArr = JSON.stringify(arr); // JSON.stringify = JSON 객체를 String으로 변환시켜준다.
+    localStorage.setItem('num', newArr);
+    let getNum = localStorage.getItem('num');
+    let newNum = JSON.parse(getNum); // JSON.parse = String객체를 JSON 객체로 변환시켜준다.
+    console.log(newNum[0]);
+
+    // 숙제 1. 카드하단 구매버튼추가하고 그거 누르면 누른 상품의 이름을 localStorage에 저장하기
+
+    $('.buy').click((e) =>{
+      
+      // buy 클래스의 div박스에 접근 siblings 기능을 사용하여 형제요소에 접근
+      let title = $(e.target).siblings('h5').text(); // div박스에 접근 클래스 상위 태그('h5')에 접근 text값을 가져옴
+      
+      // 조건문 cart값이 있는 경우 구매버튼을 클릭시 값을 해당 타이틀을 계속 배열에 추가해줌.
+      // 조건문에 해당하지 않는경우(값이 없는 경우) 새로운 cart 키와 값을 추가해줌
+      
+      let getCart = localStorage.getItem('cart');
+
+      if(getCart != null) { // 로컬스토리지에 값이 있는경우
+        // 1. 생성되어있는 cart 데이터값을 가져온다. 
+        // 2. 변형된 JSON객체에서 PUSH를 통해 배열형태로 값을 추가해준다.
+        // 3.저장된 title을 로컬스토리지에 다시 String타입으로 변환하여 넣어준다.
+        let out = JSON.parse(localStorage.getItem('cart')) 
+    
+        out.push(title); 
+        localStorage.setItem('cart', JSON.stringify(out));
+        
+      }else{ // 로컬스토리지에 값이 없는 경우
+        localStorage.setItem('cart', JSON.stringify([title]));
+      }
+
+    });
+
+
+    // 숙제 2. cart.html 같은 파일 하나 만들어서 (장바구니 페이지)
+
+//-----------------------------------------------------------------------------------------
+
+
+
+
     let count = 0;
 
     $('#more').click(function(e){
@@ -189,6 +149,102 @@
     } // else if문 end
     console.log(count);
 }); // more 클릭 end
+
+
+
+  // // 필터기능
+  // let array = [7,5,3,2,30];
+
+  // let newArray = array.filter(function(a){
+
+  //   // 필터는 조건식을 줘서 조건식에 해당하는 값만 출력할 수 있음.
+  //   return a > 10;
+    
+  // });
+  // console.log(newArray);
+
+  // 정렬기능
+  // let array = [7,3,5,2,40];
+  // let array2 = ['a', 'c' , 'b'];
+  // array.sort(function(a,b){
+  //   // a값이 양수면 a를 오른쪽으로 b값이 음수면 오른쪽으로
+  //   // ex) a(7) - b(3) = 4(양수) 오른쪽이동 (오름차순 정렬 됨)
+  //   return -a + b;
+
+  // });
+  // console.log(array)
+
+
+
+// 가격순 정렬 
+  $('#price').click(function(){
+
+products.sort(function(a, b){
+
+  return a.price - b.price;
+
+});
+
+$('.row').html('');
+
+for(let i=0; i<products.length; i++){
+
+let = templet = `<div class="col-sm-4">
+<img src="https://via.placeholder.com/600" class="w-100">
+<h5>${products[i].title}</h5>
+<p>${products[i].price}</p>
+</div>`;
+
+$('.row').append(templet);
+}
+});
+
+// 상품명 정렬
+$('#product').click(function(){
+
+products.sort(function(a,b){
+
+  return (a.title > b.title) - (a.title < b.title);
+
+});
+
+$('.row').html('');
+for(let i=0; i<products.length; i++){
+
+let = templet = `<div class="col-sm-4">
+<img src="https://via.placeholder.com/600" class="w-100">
+<h5>${products[i].title}</h5>
+<p>${products[i].price}</p>
+</div>`;
+
+$('.row').append(templet);
+}
+
+});
+
+
+// 6만원 이하 상품명만 표시
+$('#lowMoney').click(function(){
+
+let low = products.filter(function(a){
+  
+  return a.price <= 60000;
+  
+});
+
+console.log(low);
+$('.row').html('');
+    for(let i=0; i<low.length; i++){
+
+    let = templet = `<div class="col-sm-4">
+                      <img src="https://via.placeholder.com/600" class="w-100">
+                      <h5>${low[i].title}</h5>
+                      <p>${low[i].price}</p>
+                      </div>`;
+
+    $('.row').append(templet);
+  }
+});
 
   
 

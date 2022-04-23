@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div>장바구니 페이지</div>
+
+    <p class="product">상품명 1</p>
+    <p class="product">상품명 2</p>
+    <p class="product">상품명 3</p>
+<script>
+    
+    $(document).ready(function(){
+
+        // 배열이나 오브젝트 방식을 JSON객체로 변환하여 값을 가져온다.
+        let out = JSON.parse(localStorage.getItem('cart'));
+        console.log(out);
+        $('.product').eq(0).html(out[0]);
+        $('.product').eq(1).html(out[1]);
+        $('.product').eq(2).html(out[2]);
+    })
+
+
+</script>
+</body>
+</html>
