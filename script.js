@@ -115,7 +115,6 @@ $('.lorem').on('scroll', function(){
     }
 });
 
-
 // 스크롤바를 조작하여 폰트사이즈가 커지는 애니메이션
 window.addEventListener('scroll', ()=>{
 
