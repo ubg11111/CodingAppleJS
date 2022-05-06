@@ -151,3 +151,140 @@ document.querySelector(".black-bg").addEventListener('click', (e)=>{
     
 });
 
+
+// 스와이퍼 기능 구현하기
+
+let start = 0;
+let click = false;
+
+// 첫번째 이미지 마우스를 눌럿을 때
+$('.slide-box').eq(0).on('mousedown', function(e){
+
+    start = e.clientX;
+    click = true;
+}); 
+
+// 두번째 이미지 마우스를 눌럿을 때
+
+$('.slide-box').eq(1).on('mousedown', function(e){
+
+    start = e.clientX;
+    console.log(start);
+    click = true;
+
+});
+
+// 세번째 이미지 마우스를 눌럿을 때
+
+$('.slide-box').eq(2).on('mousedown', (e)=>{
+
+    start = e.clientX;
+    console.log(start);
+    click = true;
+
+});
+
+
+
+// 첫번째 이미지 마우스를 땟을 때
+$('.slide-box').eq(0).on('mouseup', function(e){
+
+    click = false;
+    move = e.clientX - start;
+    console.log(move);
+
+    if(move < -250){
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'translateX(-100vw)');
+    }else if(move > 100){
+
+        $('.slide-container')
+        .css('transition', 'none')
+        .css('transform', 'translateX(0)');
+    
+    }else{
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'translateX(0)')
+    }
+
+    // 0.5초후에 슬라이드컨테이너 애니메이션이 종료되는 로직
+    setTimeout(()=>{
+        $('.slide-container')
+        .css('transition', 'none');
+    }, 500)
+
+}); 
+
+// 두번째 이미지 마우스를 땟을 때
+
+$('.slide-box').eq(1).on('mouseup', (e)=>{
+
+    click = false;
+    move = e.clientX - start;
+    console.log(move);
+
+    if(move > 150){
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'translateX(0vw)');
+    }else if(move < -200){
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'translateX(-200vw)');
+    }
+
+    setTimeout(()=>{
+        $('.slide-container')
+        .css('transition', 'none');
+    }, 500)
+
+
+});
+
+// 세번째 이미지를 땟을 때
+
+$('.slide-box').eq(2).on('mouseup', (e)=>{
+
+    click = false;
+    move = e.clientX - start;
+    console.log(move);
+
+    if(move > 150){
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'translateX(-100vw)')
+    }else if(move < -250){
+        $('.slide-container')
+        .css('transition', 'all 0.5s')
+        .css('transform', 'trnaslateX(-200vw)')
+    }
+
+    setTimeout(()=>{
+
+        $('.slide-container').css('transition', 'none');
+
+    }, 500)
+
+});
+
+
+// 첫번째 마우스를 이동 햇을 때
+$('.slide-box').eq(0).on('mousemove', function(e){
+    
+    if(click == true){
+        $('.slide-container').css('transform', `translateX(${e.clientX - start}px)`)
+    }
+
+}); 
+
+
+// 두번째 마우스를 이동 햇을 때
+$('.slide-box').eq(1).on('mousemove', (e)=>{
+
+    if(click == true){
+        $('.slide-container').css('trasform', `translateX(${e.clientX - start}px)`)
+    }
+
+});
